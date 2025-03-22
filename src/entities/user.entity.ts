@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Article } from './article.entity';
 
 @Entity('users')
 export class User {
@@ -18,6 +19,9 @@ export class User {
 
   @Column()
   lastName: string;
+
+  @OneToMany(() => Article, article => article.author)
+  articles: Article[];
 
   @CreateDateColumn()
   createdAt: Date;
